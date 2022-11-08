@@ -36,21 +36,20 @@ R = 4;              % Ω - resistance
 g = 9.81;          % m s-2 - acceleration of gravity
 
 % initial conditions:
-
-% radians - angle of gear 2 = angle of forearm - equals -9 degrees
-% theta_F = deg2rad(-9);
-
-% reference angle = 55 degrees
-theta_Fref = deg2rad(55);
-
 % radians - upper arm angle of deflection - equals 5 degrees
 % assumed fixed for this assignemen:
 theta_U = deg2rad(5);
 
+% reference angle = 55 degrees
+theta_Fref = deg2rad(55);
+
+% radians - angle of gear 2 = angle of forearm - equals -9 degrees
+% theta_F = deg2rad(-9);
+
 % Define parameters for the simulation
-stepsize = 0.01;				% Integration step size
-comminterval = 0.1;			% Communications interval
-EndTime = 10;					% Duration of the simulation (final time)
+stepsize = 0.001;				% Integration step size
+comminterval = 0.001;			% Communications interval
+EndTime = 20;					% Duration of the simulation (final time)
 i = 0;							% Initialise counter for data storage
 
 % x = initial states conditions:
@@ -61,7 +60,9 @@ xdot = [0, 0, 0, 0, 0, 0, 0]';
     
 % Va is the controller (defined here and at the end of the loop).
 % actuator voltage to drive the motor:
-Va = ((theta_Fref * Kr) - (x(3) * Ks)) * Gc * Ke;
+% Va = Kg * Gc * ((theta_Fref * Ks) - (x(2) * Ks));
+%Va = 0;
+Va = Kg * Gc * ((theta_Fref * Ks) - (x(2) * Ks));
 
 % END OF INITIAL SEGMENT - all parameters initialised
 %
@@ -97,7 +98,7 @@ for time = 0:stepsize:EndTime
     x = rk4int('model', stepsize, x, Va);
     % END OF INTEG SECTION
 
-    Va = ((theta_Fref * Kr) - (x(3) * Ks)) * Gc * Ke;
+    Va = Kg * Gc * ((theta_Fref * Ks) - (x(2) * Ks));
 
 end
 
@@ -114,47 +115,13 @@ clf												% clear figure
 hold on
 % grid on
 
-plot(tout, xdout(:, 6)) % theta F
-plot(tout, xout(:, 6)) % theta F dot
-plot(tout, xout(:, 2)) % theta M
-legend('theta F', 'theta F dot', 'theta M')
-% subplot(7,1,1)
-% plot(tout, xout(:,1), 'b-')
-% xlabel('time [s]')
-% ylabel('state 1')
-% 
-% subplot(7,1,2)
-% plot(tout, xout(:,2), 'b-')
-% xlabel('time [s]')
-% ylabel('state 2')
-% 
-% subplot(7,1,3)
-% plot(tout, xout(:,3), 'b-')
-% xlabel('time [s]')
-% ylabel('state 3')
-% 
-% subplot(7,1,4)
-% plot(tout, xout(:,4), 'b-')
-% xlabel('time [s]')
-% ylabel('state 4')
-% 
-% subplot(7,1,5)
-% plot(tout, xout(:,5), 'b-')
-% xlabel('time [s]')
-% ylabel('state 5')
-% 
-% subplot(7,1,6)
-% plot(tout, xout(:,6), 'b-')
-% xlabel('time [s]')
-% ylabel('state 6')
-% 
-% subplot(7,1,7)
-% plot(tout, xout(:,7), 'b-')
-% xlabel('time [s]')
-% ylabel('state 7')
+plot(tout,xout(:,2)) % theta M
+plot(tout,xout(:,6)) % theta F
+plot(tout,xout(:,7)) % theta F dot
+legend('Motor angle', 'Forearm angle', 'Speed of forearm')
 
 xlabel('Time (s)')
-% ylabel('')
+ylabel('Radians')
 
 hold off
 
