@@ -13,9 +13,8 @@ function xdot = model(x, Va)
     
     xdot(1,1) = 1/L * (Va-R * x(1) - Ke * x(3));
     xdot(2,1) = x(3);
-    xdot(3,1) = 1/Jm*(Kt*x(1)-Bsm*(x(3)-x(5)));
+    xdot(3,1) = 1/Jm * (Kt*x(1)-Bsm*(x(3)-x(5)));
     xdot(4,1) = x(5);
-    xdot(5,1) = 1/Jgear1*(Bsm*(x(3)-x(5)));
+    xdot(5,1) = 1/Jgear1 * (Bsm*(x(3)-x(5)));
     xdot(6,1) = x(7);
-    %xdot(7,1) = (GR*Kf*x(4)) - (Bsf/Jf) * x(7) - ((Mf*Lf)/(2*Jf))*g*sin(theta_U + x(6));
-    xdot(7,1) = 1/Jf *((GR * Kf * x(4)) - (Bsf * x(7)) - ((Mf * Lf * g * sin(theta_U + x(6))) / 2));
+    xdot(7,1) = 1/Jf * ((GR * Kf * x(4)) - (Bsf * x(7)) - ((Mf * Lf * g * sin(theta_U + x(6))) / 2));

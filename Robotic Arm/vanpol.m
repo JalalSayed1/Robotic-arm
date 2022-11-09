@@ -93,6 +93,7 @@ plot(tout,xout(:,2)) % theta M
 plot(tout,xout(:,6)) % theta F
 plot(tout,xout(:,7)) % theta F dot
 
+title("MATLAB response")
 %       theta M         theta F         theta F dot
 legend('Motor angle', 'Forearm angle', 'Speed of forearm')
 xlabel('Time (s)')
