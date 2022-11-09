@@ -1,14 +1,7 @@
-% Simulation of a continuous dynamic system described by ordinary
-% differential equations.
-%
-% INITIAL SEGMENT
-%
-% Define constant model parameters as global variables. Set the initial 
-% conditions of the states and set up the input to the model.
-%
-% It is good practice to clear the MATLAB workspace at the beginning of 
-% a program
 
+% INITIAL SEGMENT
+
+% clear the MATLAB workspace at the beginning of a program:
 clear all
 
 % Define and initialise the model input and any model parameters
@@ -33,18 +26,15 @@ L = 0.1;            % H - inductance
 Lf = 0.35;          % m - length of forearm
 Mf = 0.5;           % kg - masses of forearm
 R = 4;              % Ω - resistance
-g = 9.81;          % m s-2 - acceleration of gravity
+g = 9.81;           % m s-2 - acceleration of gravity
 
 % initial conditions:
-% radians - upper arm angle of deflection - equals 5 degrees
+% upper arm angle of deflection in radians,
 % assumed fixed for this assignemen:
 theta_U = deg2rad(5);
 
-% reference angle = 55 degrees
+% reference angle in radians:
 theta_Fref = deg2rad(55);
-
-% radians - angle of gear 2 = angle of forearm - equals -9 degrees
-% theta_F = deg2rad(-9);
 
 % Define parameters for the simulation
 stepsize = 0.001;				% Integration step size
@@ -53,25 +43,18 @@ EndTime = 20;					% Duration of the simulation (final time)
 i = 0;							% Initialise counter for data storage
 
 % x = initial states conditions:
-% theta F = theta gear 2 = -9 degrees initially:
+% theta F equals theta gear 2 equals -9 degrees initially:
 x = [0, 0, 0, 0, 0, deg2rad(-9), 0]';
 % state derivagives:
 xdot = [0, 0, 0, 0, 0, 0, 0]';
     
 % Va is the controller (defined here and at the end of the loop).
 % actuator voltage to drive the motor:
-% Va = Kg * Gc * ((theta_Fref * Ks) - (x(2) * Ks));
-%Va = 0;
 Va = Kg * Gc * ((theta_Fref * Ks) - (x(2) * Ks));
 
 % END OF INITIAL SEGMENT - all parameters initialised
-%
-% DYNAMIC SEGMENT
-%
-% The DYNAMIC SECTION is the main section of a simulation program. This is
-% evaluated for every time interval during the simulation. Therefore it is 
-% an interative process.
 
+% DYNAMIC SEGMENT
 for time = 0:stepsize:EndTime
     % store time state and state derivative data every communication interval
     if rem(time,comminterval)==0
@@ -82,34 +65,25 @@ for time = 0:stepsize:EndTime
     end							    % end of storage      
    
     % DERIVATIVE SECTION
-	%
-	% The DERIVATIVE SECTION contains the statements needed to evaluate the
-	% state derivatives - these statements define the dynamic model (model.m)
-
+	
     xdot = model(x, Va);
 
 	% END OF DERIVATIVE SECTION
-	%
+	
 	% INTEG SECTION
-	% 
+	
     % Numerical integration of the state derivatives for this time interval
-   
-    %x = eulerint(xdot, stepsize, x);
     x = rk4int('model', stepsize, x, Va);
     % END OF INTEG SECTION
 
     Va = Kg * Gc * ((theta_Fref * Ks) - (x(2) * Ks));
-
+    
 end
 
 
 % END OF DYNAMIC SEGMENT
-%
-% TERMINAL SEGMENT
-%
-% The TERMINAL SEGMENT contains statements that are executed after the simulation 
-% is complete e.g. plotting results
 
+% TERMINAL SEGMENT
 figure(1)										% define figure window number
 clf												% clear figure
 hold on
@@ -118,14 +92,15 @@ hold on
 plot(tout,xout(:,2)) % theta M
 plot(tout,xout(:,6)) % theta F
 plot(tout,xout(:,7)) % theta F dot
-legend('Motor angle', 'Forearm angle', 'Speed of forearm')
 
+%       theta M         theta F         theta F dot
+legend('Motor angle', 'Forearm angle', 'Speed of forearm')
 xlabel('Time (s)')
 ylabel('Radians')
 
 hold off
 
 % END OF TERMINAL SECTION
-%
+
 % END OF SIMULATION PROGRAM
     

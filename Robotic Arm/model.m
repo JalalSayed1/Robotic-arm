@@ -9,8 +9,7 @@
 function xdot = model(x, Va)
 
     % global parameter transferred from main program
-    global Bsm Bsf Jm Jgear1 Jf Gc GR Ke Kf Kr Ks Kt L Lf Mf R g theta_U
-    
+    global Bsm Bsf Jm Jgear1 Jf GR Ke Kf Kt L Lf Mf R g theta_U
     
     xdot(1,1) = 1/L * (Va-R * x(1) - Ke * x(3));
     xdot(2,1) = x(3);
