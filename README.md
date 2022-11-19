@@ -83,6 +83,7 @@
 2. Simulink block diagram response:
 ![Simulink block diagram response](https://user-images.githubusercontent.com/92950538/202859258-ed1988d7-fae9-499a-8a69-6ca4720e363b.png)
 </br>
+
 - The responses show how the motor angle, arm position and speed are related together. Initially, the motor changes its angle fast because its sensor shows that the arm is positioned at -9°. Therefore, the forearm’s speed and the angle changed quickly. Then, as the motor slows down, the speed and angle of the forearm slow down too until reaching a steady state at around 55° (i.e. the reference angle) and speed of 0.
 
 
