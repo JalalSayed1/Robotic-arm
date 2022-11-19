@@ -2,12 +2,12 @@
 
 ## Overview
 
-**[IMAGE]**
+![Prosthetic Arm Elbow Motion Schematic Diagram](https://user-images.githubusercontent.com/92950538/202859147-3f3b5eab-64fc-41b0-ac0b-6f2496a497b9.png)
 </br>
 - Robotic arms are used extensively in several industries. They are electro-mechanical systems that replicate the articulated motion of human arms. The one developed here is for limb replacement. The movement of the 2 linked parts (upper arm and forearm) is predominantly through the actuated elbow joint. A DC motor controller in this project will drive this.
 - The actuator is connected to the upper arm. For this project, we assumed the upper arm is fixed at a specific angle (5°). The actuator rotates the forearm employing a set of gears.
-</br>
-**[IMAGE]**
+
+![Geometry of rotating motion](https://user-images.githubusercontent.com/92950538/202859195-daed0df4-660d-497c-8ba3-9f548bdf2c70.png)
 </br>
 - The motion of the arm is regulated by an automatic control system that determines the necessary rotational deflection of the forearm. To achieve this, the arm must be equipped with the necessary system to ensure its automatic movement within its operating environment. The general principle of automated actuator systems is to feed information from joint rotation sensors to the arm’s control system.
 - This system changes the voltage applied to the elbow actuator to produce the required rotational motion and thus change the deflection angle of the forearm.
@@ -52,15 +52,6 @@
 | R | 4 | Ω | resistance |
 | G | 9.81 | m/s<sup>2</sup> | acceleration of gravity |
 
-## Responses
-
-1. MATLAB reponse:
-**[IMAGE]**
-2. Simulink block diagram response:
-**[IMAGE]**
-
-The responses show how the motor angle, arm position and speed are related together. Initially, the motor changes its angle fast because its sensor shows that the arm is positioned at -9°. Therefore, the forearm’s speed and the angle changed quickly. Then, as the motor slows down, the speed and angle of the forearm slow down too until reaching a steady state at around 55° (i.e. the reference angle) and speed of 0.
-
 ## Initial Conditions, Numerical Integration Solver & Step-Size Selection
 
 - Initial conditions: angle of forearm = theta F = -9°.
@@ -70,21 +61,28 @@ The responses show how the motor angle, arm position and speed are related toget
   - After calculating the time constant of the system, I found out that any step-size less than 0.0025 will be sufficient. Therefore, 0.001 has been selected for more accurate measurements.
 
 ## Block diagram
-overview:
-**[IMAGE]**
+1. Overview:
+![image](https://user-images.githubusercontent.com/92950538/202859319-eb0b06ce-26ce-404b-b500-762f08a2036f.png)
+2. All system:
+![image](https://user-images.githubusercontent.com/92950538/202859299-3bb8568a-e163-4c38-bf11-8d2e0daffff0.png)
+3. Actuator:
+![image](https://user-images.githubusercontent.com/92950538/202859303-d59dcecf-1003-456f-8f87-fb6e82e0c4c9.png)
+4. Gear system:
+4.1. Overview:
+![image](https://user-images.githubusercontent.com/92950538/202859329-c85735b1-50d1-4f7d-82c6-df69a12d024b.png)
+4.2. Implementation:
+![image](https://user-images.githubusercontent.com/92950538/202859306-fac35497-b2a1-4f01-8904-5e3d636ef8b0.png)
+5. Forearm dynamic:
+![image](https://user-images.githubusercontent.com/92950538/202859341-43680292-f4ec-4f2e-9592-19294e17d293.png)
 
-1. All system:
-**[IMAGE]**
-2. Actuator:
-**[IMAGE]**
-3. Gear system:
-overview
-**[IMAGE]**
-implementation
-**[IMAGE]**
-1. Forearm dynamic:
-**[IMAGE]**
+## Responses
 
-## Results
-**[IMAGE]** 
+1. MATLAB reponse:
+![MATLAB reponse](https://user-images.githubusercontent.com/92950538/202859243-9af1a79e-61b9-4c27-979a-727c6956b989.png)
+
+2. Simulink block diagram response:
+![Simulink block diagram response](https://user-images.githubusercontent.com/92950538/202859258-ed1988d7-fae9-499a-8a69-6ca4720e363b.png)
+</br>
+- The responses show how the motor angle, arm position and speed are related together. Initially, the motor changes its angle fast because its sensor shows that the arm is positioned at -9°. Therefore, the forearm’s speed and the angle changed quickly. Then, as the motor slows down, the speed and angle of the forearm slow down too until reaching a steady state at around 55° (i.e. the reference angle) and speed of 0.
+
 
