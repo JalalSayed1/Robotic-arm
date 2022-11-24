@@ -20,13 +20,13 @@ Ke = 0.35;          % V/rad/s - back emf constant
 Kf = 0.5;           % torque gain
 Kg = 2.0;           % gear compensator gain
 Kr= 0.9;            % reference amp gain
-Ks= 0.9;            % motor deflection actuator sensor gain
+Ks= 0.9;            % motor deflection actuator sesor gain
 Kt = 0.35;          % Nm/A - torque constant 
 L = 0.1;            % H - inductance
 Lf = 0.35;          % m - length of forearm
-Mf = 0.5;           % kg - mass of forearm
+Mf = 0.5;           % kg - masses of forearm
 R = 4;              % Ω - resistance
-g = 9.81;           % m/s2 - acceleration of gravity
+g = 9.81;           % m s-2 - acceleration of gravity
 
 % initial conditions:
 % upper arm angle of deflection in radians,
