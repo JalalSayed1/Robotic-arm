@@ -7,7 +7,7 @@ clear all
 % Define and initialise the model input and any model parameters
 % as global variables so that they can be read in the function model.m.
 
-global Bsm Bsf Jm Jgear1 Jf Gc GR Ke Kf Kg Kr Ks Kt L Lf Mf R g theta_U Ki
+global Bsm Bsf Jm Jgear1 Jf Gc GR Ke Kf Kg Kr Ks Kt L Lf Mf R g theta_U
 
 Bsm = 0.01;         % Nm/rad/s - damping coefficient for the motor
 Bsf = 1.5;          % Nm/rad/s -  damping coefficient for the forearm
@@ -48,6 +48,7 @@ x = [0, 0, 0, 0, 0, deg2rad(-9), 0]';
 xdot = [0, 0, 0, 0, 0, 0, 0]';
 
 % find different values of Gc and plot them:
+% clear plots:
 for j=1:1:3
     figure(j)								% define figure window number
     clf										% clear figure
@@ -109,7 +110,9 @@ function [tout,xout] = find_response(Gc, x, xdot, theta_Fref, Ks, Kg, stepsize, 
         x = rk4int('model', stepsize, x, Va);
         % END OF INTEG SECTION
     
-        Va = Kg * Gc * ((theta_Fref * Ks) - (x(2) * Ks));
+        Ve = Gc * ((theta_Fref * Ks) - (x(2) * Ks));
+        Va = Kg * Ve;
+    
     end
 end
 % END OF SIMULATION PROGRAM
