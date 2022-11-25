@@ -63,7 +63,6 @@ yline(theta_Fref,"--", 'DisplayName','theta Fref target')
 
 % Gc = elbow controller gain - this value will change in a for loop to investigate best value for it
 for Gc=0.4:0.05:0.6
-    i = i+1;
     [tout, xout_Gc] = find_response(Gc, x, xdot, theta_Fref, Ks, Kg, stepsize, EndTime, comminterval);
     % plot:
     Gc_str = num2str(Gc);
