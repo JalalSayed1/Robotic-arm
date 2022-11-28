@@ -113,9 +113,10 @@ function [tout,xout] = find_response(Gc, Ki, x, xdot, theta_Fref, Ks, Kg, stepsi
 end
 
 function Va = calc_Va(theta_Fref, Ks, x, integrate_delta_theta, stepsize, Gc, Ki, Kg)
-    delta_theta = (theta_Fref * Ks) - (x(2) * Ks);
+    delta_theta = (theta_Fref * Ks) - (x(2) * Ks); % x(2) = theta M
     integrate_delta_theta = eulerint(integrate_delta_theta, stepsize, delta_theta);
     Ve = (delta_theta * Gc) +  Gc * Ki * integrate_delta_theta;
     Va = Kg * Ve;
 end
+
 % END OF SIMULATION PROGRAM
