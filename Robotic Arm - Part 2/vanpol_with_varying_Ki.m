@@ -59,20 +59,20 @@ end
 integrate_delta_theta = 0;
 for Ki=[0,3,4,5]
     i = i+1;
-    [tout, xout_Gc] = find_response(Gc, Ki, x, xdot, theta_Fref, Ks, Kg, stepsize, EndTime, comminterval, integrate_delta_theta);
+    [tout, xout] = find_response(Gc, Ki, x, xdot, theta_Fref, Ks, Kg, stepsize, EndTime, comminterval, integrate_delta_theta);
     % plot:
     Ki_str = num2str(Ki);
     figure(1)
     hold on
-    plot(tout,xout_Gc(:,2), 'DisplayName', " Ki = " + Ki_str) % theta M
+    plot(tout,xout(:,2), 'DisplayName', " Ki = " + Ki_str) % theta M
     hold off
     figure(2)
     hold on
-    plot(tout,xout_Gc(:,7), 'DisplayName', "theta F dot "+ Ki_str) % theta F dot
+    plot(tout,xout(:,7), 'DisplayName', "theta F dot "+ Ki_str) % theta F dot
     hold off
     figure(3)
     hold on
-    plot(tout,xout_Gc(:,6), 'DisplayName', "theta F "+ Ki_str) % theta F
+    plot(tout,xout(:,6), 'DisplayName', "theta F "+ Ki_str) % theta F
     hold off
 end
 
