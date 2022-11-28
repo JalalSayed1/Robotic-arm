@@ -29,6 +29,10 @@ R = 4;              % Ω - resistance
 g = 9.81;           % m s-2 - acceleration of gravity
 Ki = 4;             % integration gain factor
 
+% upper arm angle of deflection in radians:
+% will vary with time in the find_response function:
+theta_U = 0;
+
 % reference angle in radians:
 theta_Fref = deg2rad(55);
 
@@ -43,10 +47,6 @@ i = 0;							% Initialise counter for data storage
 x = [0, 0, 0, 0, 0, deg2rad(-9), 0]';
 % state derivagives:
 xdot = [0, 0, 0, 0, 0, 0, 0]';
-
-% upper arm angle of deflection in radians:
-% will vary with time in the find_response function:
-theta_U = deg2rad(5);
 
 % find different values of Gc and plot them:
 % clear plots:
@@ -66,19 +66,19 @@ end
 
 integrate_delta_theta = 0;
 
-[tout, xout_Gc] = find_response(Gc, Ki, x, xdot, theta_Fref, Ks, Kg, stepsize, EndTime, comminterval, integrate_delta_theta);
+[tout, xout] = find_response(Gc, Ki, x, xdot, theta_Fref, Ks, Kg, stepsize, EndTime, comminterval, integrate_delta_theta);
 % plot:
 figure(1)
 hold on
-plot(tout,xout_Gc(:,2), 'DisplayName', "theta M") % theta M
+plot(tout,xout(:,2), 'DisplayName', "theta M") % theta M
 hold off
 figure(2)
 hold on
-plot(tout,xout_Gc(:,7), 'DisplayName', "theta F dot") % theta F dot
+plot(tout,xout(:,7), 'DisplayName', "theta F dot") % theta F dot
 hold off
 figure(3)
 hold on
-plot(tout,xout_Gc(:,6), 'DisplayName', "theta F") % theta F
+plot(tout,xout(:,6), 'DisplayName', "theta F") % theta F
 hold off
 
 
