@@ -95,4 +95,21 @@
 - In this part, the variation in values is achieved by **interpolating** data points that represent the upper angle deflection at specific time points.
 - Therefore, Ve equation will be changed:
   - From simple Gain $Ve = Gc * \Deltaθ$
-  - To $Ve = Gc*(1+Ki/s) \Deltaθ$ ; where 1/s is the Laplace operator and Ki is the integral gain.
+  - To $Ve = Gc*(1+Ki/s) \Deltaθ$ ; where `1/s` is the Laplace operator and `Ki` is the integral gain.
+
+Using the mentioned equation, we will be varying two variables: Gc (the compensator gain) and Ki (the integral gain) and investigate how changing these two parameters can improve the performance of our system.
+
+Then, to vary the upper arm angle over time, we will use the Quadratic Splines interpolation method to estimate its value using lab data obtained over short time intervals:
+
+| Time (s) | 0 | 3.5 | 7.5 | 16.5 | 21.5 | 25 |
+|---|---|---|---|---|---|---|
+| $\theta$u | 5.0 | 10.5 | 24.5 | 27.5 | 35.5 | 45.5 |
+
+## Gc Control Gain Variation Results & Analysis
+
+**[IMAGE]**
+
+## KI Control Gain Variation Results & Analysis
+As we found previously that Gc = 0.5 will produce the best results, we will fix this value here. Now, by varying Ki from 0 to 5, we will notice that above 4, the graph will start to wobble. This means that the value of Ki = 4 is better than any of the values above this one. Adding the integrator gain leads to some initial damping (i.e., around 0.6s). However, it makes the system reaches a steady-state much faster than without it. For instance, with Ki = 0 (i.e. no integrator gain), the system reaches steady-state at about 1.8s. Adding the integrator gain value of 4 leads the system to reach this steady state at about 1s.
+
+**[IMAGE]**
