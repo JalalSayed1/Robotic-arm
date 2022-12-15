@@ -107,9 +107,11 @@ Then, to vary the upper arm angle over time, we will use the Quadratic Splines i
 
 ## Gc Control Gain Variation Results & Analysis
 
-**[IMAGE]**
+![image](https://user-images.githubusercontent.com/92950538/207927402-cfac2f9d-f790-48ec-9ab5-32b8f34d2c45.png)
+
+
 
 ## KI Control Gain Variation Results & Analysis
 As we found previously that Gc = 0.5 will produce the best results, we will fix this value here. Now, by varying Ki from 0 to 5, we will notice that above 4, the graph will start to wobble. This means that the value of Ki = 4 is better than any of the values above this one. Adding the integrator gain leads to some initial damping (i.e., around 0.6s). However, it makes the system reaches a steady-state much faster than without it. For instance, with Ki = 0 (i.e. no integrator gain), the system reaches steady-state at about 1.8s. Adding the integrator gain value of 4 leads the system to reach this steady state at about 1s.
 
-**[IMAGE]**
+![image](https://user-images.githubusercontent.com/92950538/207927743-4fe2e149-bc7b-445b-9738-77463ed6fdf1.png)
