@@ -1,4 +1,4 @@
-# Robotic-arm
+# Robotic Arm
 
 ## Overview
 
